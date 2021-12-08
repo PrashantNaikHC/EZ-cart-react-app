@@ -1,68 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import useInput from "../../hooks/use-input";
 import classes from "./Login.module.css";
 
+const userNameValidator = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+
+const passwordValidator = (password) => {
+  return password.length > 8;
+};
+
 const Login = (props) => {
-  const [formIsValid, setFormIsValid] = useState(false);
-  const [emailIsValid, setEmailIsValid] = useState(false);
-  const [passwordIsValid, setPassowordIsValid] = useState(false);
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmailInput,
+  } = useInput(userNameValidator);
 
-  // runs after the render
-  // runs only for the first time if provided with empty array(no dependencies), runs everytime otherwise
-  useEffect(() => {
-    console.log("effect run");
-    const timer = setTimeout(() => {
-      setFormIsValid(emailIsValid && passwordIsValid);
-    }, 500);
+  const {
+    value: enteredPassword,
+    isValid: enteredPasswordIsValid,
+    hasError: passwordInputHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: resetPasswordInput,
+  } = useInput(passwordValidator);
 
-    // return function runs prior and clears the previous instance of timer
-    // for emtpy array(no dependencies), will run once the component is removed from dom
-    return () => {
-      console.log("Cleanup of timer");
-      clearTimeout(timer);
-    };
-  }, [emailIsValid, passwordIsValid]);
+  let formIsValid = false;
+
+  // logic for the form validation
+  if (enteredEmailIsValid && enteredPasswordIsValid) {
+    formIsValid = true;
+  }
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-  };
-
-  // todo: can be moved to utils
-  const validateEmail = (email) => {
-    return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  };
-
-  const emailHandler = (event) => {
-    if (validateEmail(event.target.value)) {
-      setEmailIsValid(true);
-    } else {
-      setEmailIsValid(false);
+    if (!enteredEmailIsValid || !enteredPasswordIsValid) {
+      return;
     }
+    console.log(enteredEmail);
+    resetEmailInput();
+    resetPasswordInput();
   };
 
-  const passwordHandler = (event) => {
-    if (event.target.value.length > 8) {
-      setPassowordIsValid(true);
-    } else {
-      setPassowordIsValid(false);
-    }
-  };
-
-  let loginButton;
-  if (formIsValid) {
-    loginButton = (
-      <button className={classes.button} id="submit" type="submit">
-        Login
-      </button>
-    );
-  } else {
-    loginButton = (
-      <button className={classes.button} id="submit" type="submit" disabled>
-        Login
-      </button>
-    );
-  }
+  const userNameInputClasses = emailInputHasError ? "errorInput" : "input";
+  const passwordInputClasses = passwordInputHasError ? "errorInput" : "input";
+  console.log("Rendering component");
 
   return (
     <React.Fragment>
@@ -73,11 +61,16 @@ const Login = (props) => {
             Username
           </label>
           <input
-            className={classes.input}
+            className={userNameInputClasses}
             id="username"
             type="text"
-            onChange={emailHandler}
+            value={enteredEmail}
+            onChange={emailChangeHandler}
+            onBlur={emailBlurHandler}
           />
+          {emailInputHasError && (
+            <p className={classes.error}>Please enter a valid email address.</p>
+          )}
         </div>
         <br />
         <div className={classes.inputBlock}>
@@ -85,14 +78,21 @@ const Login = (props) => {
             Password
           </label>
           <input
-            className={classes.input}
+            className={passwordInputClasses}
             id="password"
-            type="text"
-            onChange={passwordHandler}
+            type="password"
+            value={enteredPassword}
+            onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
           />
+          {passwordInputHasError && (
+            <p className={classes.error}>Please enter a valid password.</p>
+          )}
         </div>
         <br />
-        {loginButton}
+        <button className={classes.button} id="submit" type="submit">
+          Login
+        </button>
         <br />
         <button className={classes.button} id="submit" type="submit">
           Register

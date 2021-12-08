@@ -1,4 +1,5 @@
 .button {
+  width:50%;
   margin: auto;
   padding: 5px;
   display: block;
@@ -7,6 +8,7 @@
 
 .form {
   margin: auto;
+  max-width: 40%;
 }
 
 .h1 {
@@ -14,7 +16,17 @@
 }
 
 .input {
-  margin: auto;
+  border-radius: 5px;
+}
+
+.errorInput {
+  border:1px solid red;
+  border-radius: 5px;
+}
+
+.successInput {
+  border:1px solid green;
+  border-radius: 5px;
 }
 
 .label {
@@ -25,4 +37,9 @@
   text-align: center;
   display: block;
   margin: 0px auto;
+}
+
+.error {
+  color: red;
+  font-size: xx-small;
 }
