@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import classes from "./Login.module.css";
 
 const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
@@ -51,13 +52,13 @@ const Login = (props) => {
   let loginButton;
   if (formIsValid) {
     loginButton = (
-      <button id="submit" type="submit">
+      <button className={classes.button} id="submit" type="submit">
         Login
       </button>
     );
   } else {
     loginButton = (
-      <button id="submit" type="submit" disabled>
+      <button className={classes.button} id="submit" type="submit" disabled>
         Login
       </button>
     );
@@ -65,17 +66,35 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
-      <h1>EZ Cart</h1>
-      <form onSubmit={onSubmitHandler}>
-        <label htmlFor="username">Username</label>
-        <input id="username" type="text" onChange={emailHandler} />
+      <h1 className={classes.h1}>EZ Cart</h1>
+      <form className={classes.form} onSubmit={onSubmitHandler}>
+        <div className={classes.inputBlock}>
+          <label className={classes.label} htmlFor="username">
+            Username
+          </label>
+          <input
+            className={classes.input}
+            id="username"
+            type="text"
+            onChange={emailHandler}
+          />
+        </div>
         <br />
-        <label htmlFor="password">Password</label>
-        <input id="password" type="text" onChange={passwordHandler} />
+        <div className={classes.inputBlock}>
+          <label className={classes.label} htmlFor="password">
+            Password
+          </label>
+          <input
+            className={classes.input}
+            id="password"
+            type="text"
+            onChange={passwordHandler}
+          />
+        </div>
         <br />
         {loginButton}
         <br />
-        <button id="submit" type="submit">
+        <button className={classes.button} id="submit" type="submit">
           Register
         </button>
       </form>

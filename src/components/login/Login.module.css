@@ -1,0 +1,28 @@
+.button {
+  margin: auto;
+  padding: 5px;
+  display: block;
+  border-radius: 4px;
+}
+
+.form {
+  margin: auto;
+}
+
+.h1 {
+  text-align: center;
+}
+
+.input {
+  margin: auto;
+}
+
+.label {
+  margin-right: 10px;
+}
+
+.inputBlock {
+  text-align: center;
+  display: block;
+  margin: 0px auto;
+}
