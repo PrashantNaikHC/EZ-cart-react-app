@@ -43,9 +43,16 @@ const Login = (props) => {
     if (!enteredEmailIsValid || !enteredPasswordIsValid) {
       return;
     }
-    console.log(enteredEmail);
-    resetEmailInput();
-    resetPasswordInput();
+    if (formIsValid) {
+      fetchLogin();
+    }
+  };
+
+  // todo: remove this code block later
+  const fetchLogin = async () => {
+    const loginResult = await fetch("http://localhost:8000/login");
+    const loginData = await loginResult.json();
+    console.log(loginData);
   };
 
   const userNameInputClasses = emailInputHasError ? "errorInput" : "input";
