@@ -98,7 +98,6 @@ const Login = (props) => {
           Register
         </button>
       </form>
-      {console.log("render run")}
     </React.Fragment>
   );
 };
