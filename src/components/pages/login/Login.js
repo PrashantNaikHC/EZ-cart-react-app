@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import useInput from "../../../hooks/use-input";
+import AuthContext from "../../../store/auth-context";
 import classes from "./Login.module.css";
 
 const userNameValidator = (email) => {
@@ -14,6 +15,7 @@ const passwordValidator = (password) => {
 };
 
 const Login = (props) => {
+  const authContext = useContext(AuthContext);
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -45,8 +47,9 @@ const Login = (props) => {
       return;
     }
     if (formIsValid) {
-      fetchLogin();
+      //fetchLogin();
     }
+    authContext.login()
   };
 
   // todo: remove this code block later
