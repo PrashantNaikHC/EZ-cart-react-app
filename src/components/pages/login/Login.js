@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import useInput from "../../../hooks/use-input";
 import classes from "./Login.module.css";
 
@@ -101,9 +102,11 @@ const Login = (props) => {
           Login
         </button>
         <br />
-        <button className={classes.button} id="submit" type="submit">
-          Register
-        </button>
+        <Link to="/register" style={{ textDecoration: "none" }}>
+          <button className={classes.button} id="submit" type="submit">
+            Register
+          </button>
+        </Link>
       </form>
     </React.Fragment>
   );
