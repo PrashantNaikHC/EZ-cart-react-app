@@ -1,13 +1,14 @@
-import React from 'react';
-import MainNavigation from '../../UI/MainNavigation';
+import React from "react";
+import MainNavigation from "../../UI/MainNavigation";
+import Products from "../../UI/Products/Products";
 
 const Home = (props) => {
-return (
+  return (
     <React.Fragment>
-        <MainNavigation/>
+      <MainNavigation />
+      <Products />
     </React.Fragment>
-)
-
-}
+  );
+};
 
 export default Home;
