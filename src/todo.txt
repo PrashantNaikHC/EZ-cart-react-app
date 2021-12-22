@@ -1,0 +1,4 @@
+add authentication
+add restriction to products url
+style the list item
+add redux for adding to cart logic
