@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useInput from "../../../hooks/use-input";
 import AuthContext from "../../../store/auth-context";
+import MainNavigation from "../../UI/MainNavigation";
 import classes from "./Login.module.css";
 
 const userNameValidator = (email) => {
@@ -16,6 +18,7 @@ const passwordValidator = (password) => {
 
 const Login = (props) => {
   const authContext = useContext(AuthContext);
+  const history = useHistory();
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -50,6 +53,7 @@ const Login = (props) => {
       //fetchLogin();
     }
     authContext.login()
+    history.replace("/products")
   };
 
   // todo: remove this code block later
