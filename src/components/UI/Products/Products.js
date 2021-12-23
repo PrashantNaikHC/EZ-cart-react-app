@@ -10,7 +10,7 @@ const Products = (props) => {
 
   useEffect(() => {
     sendRequest();
-    console.log('data', data);
+    console.log("data", data);
   }, [sendRequest]);
 
   if (status === "pending") {
@@ -25,7 +25,23 @@ const Products = (props) => {
     return <p className="centered">{error}</p>;
   }
 
-  return <div>{status === "completed" && <ProductItem products={data} />}</div>;
+  const productsList =
+    status === "completed" &&
+    data.map((item) => (
+      <ul>
+        <ProductItem
+          id={item.id}
+          title={item.title}
+          price={item.price}
+          description={item.description}
+          category={item.category}
+          image={item.image}
+          rating={item.rating}
+        />
+      </ul>
+    ));
+
+  return <div>{productsList}</div>;
 };
 
 export default Products;
