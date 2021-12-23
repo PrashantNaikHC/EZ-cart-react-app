@@ -1,12 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import MainNavigation from "../../UI/MainNavigation";
 import ProductItem from "../../UI/ProductItem/ProductItem";
 
 const Cart = (props) => {
     const cartItems = useSelector(state => state.cart.cartItems)
     console.log('cart items', cartItems);
 
-    return cartItems.map((item) => (
+    return <React.Fragment>
+      <MainNavigation />
+      {cartItems.map((item) => (
         <ul>
           <ProductItem
             key={item.id}
@@ -19,7 +22,8 @@ const Cart = (props) => {
             rating={item.rating}
           />
         </ul>
-      ));
+      ))}
+    </React.Fragment>
 };
 
 export default Cart;
