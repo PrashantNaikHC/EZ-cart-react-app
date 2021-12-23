@@ -1,21 +1,24 @@
-import { useReducer } from "react";
+import { useReducer, useCallback } from "react";
 
 function httpReducer(state, action) {
-  if (state === "SEND") {
+  if (action.type === "SEND") {
+    console.log("captured SEND request");
     return {
       status: "pending",
       data: null,
       error: null,
     };
   }
-  if (state === "SUCCESS") {
+  if (action.type === "SUCCESS") {
+    console.log("captured SUCCESS request");
     return {
       status: "completed",
       data: action.data,
       error: null,
     };
   }
-  if (state === "ERROR") {
+  if (action.type === "ERROR") {
+    console.log("captured ERROR request");
     return {
       status: "completed",
       data: null,
