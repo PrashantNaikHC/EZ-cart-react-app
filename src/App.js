@@ -5,6 +5,7 @@ import Login from "./components/pages/login/Login";
 import Register from "./components/pages/register/Register";
 import Home from "./components/pages/home/home";
 import AuthContext from "./store/auth-context";
+import Cart from "./components/pages/cart/Cart";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -19,6 +20,9 @@ function App() {
       </Route>
       <Route path="/products">
         {authContext.isLoggedIn ? <Home /> : <Login />}
+      </Route>
+      <Route path="/cart">
+        {authContext.isLoggedIn ? <Cart /> : <Login />}
       </Route>
     </div>
   );
