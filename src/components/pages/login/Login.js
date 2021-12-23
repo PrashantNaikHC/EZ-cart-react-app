@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useInput from "../../../hooks/use-input";
 import AuthContext from "../../../store/auth-context";
-import MainNavigation from "../../UI/MainNavigation";
 import classes from "./Login.module.css";
 
 const userNameValidator = (email) => {
