@@ -1,11 +1,14 @@
-import logo from "./logo.svg";
 import "./App.css";
+import React, {useContext} from 'react';
 import { Route } from "react-router-dom";
 import Login from "./components/pages/login/Login";
 import Register from "./components/pages/register/Register";
 import Home from "./components/pages/home/home";
+import AuthContext from "./store/auth-context";
 
 function App() {
+  const authContext = useContext(AuthContext);
+
   return (
     <div>
       <Route path="/login">
@@ -15,7 +18,7 @@ function App() {
         <Register />
       </Route>
       <Route path="/products">
-        <Home />
+        {authContext.isLoggedIn ? <Home /> : <Login />}
       </Route>
     </div>
   );
