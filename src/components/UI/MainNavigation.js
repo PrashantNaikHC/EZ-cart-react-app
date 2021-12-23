@@ -1,9 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import classes from "./MainNavigation.module.css";
 
 const MainNavigation = (props) => {
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  let cartLabel;
+  if (cartItems.length > 0) {
+    cartLabel = "Cart" + ` (${cartItems.length})`;
+  } else {
+    cartLabel = "Cart";
+  }
+
   return (
     <header className={classes.header}>
       <Link className={classes.logo}>EZCart</Link>
@@ -16,7 +25,7 @@ const MainNavigation = (props) => {
           </li>
           <li>
             <Link className={classes.link} to="/cart">
-              Cart
+              {cartLabel}
             </Link>
           </li>
           <li>
