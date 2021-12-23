@@ -21,22 +21,24 @@ const cartSlice = createSlice({
       } else {
         state.cartItems.push(newItem);
       }
+      console.log("reducer executed", "addItem");
     },
+
     /**
      * Payload is the ID of the product
      * @param {state} state
      * @param {action} action
      */
     removeItem(state, action) {
-      const existingItem = state.cartItems.find(
-        (item) => item.id === newItem.id
-      );
+      const id = action.payload;
+      const existingItem = state.cartItems.find((item) => item.id === id);
       if (existingItem) {
         // item already present in cart, remove it
         state.cartItems = state.cartItems.filter(
           (item) => item.id !== existingItem.id
         );
       }
+      console.log("reducer executed", "removeItem");
     },
   },
 });

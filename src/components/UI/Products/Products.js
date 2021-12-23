@@ -30,6 +30,7 @@ const Products = (props) => {
     data.map((item) => (
       <ul>
         <ProductItem
+          key={item.id}
           id={item.id}
           title={item.title}
           price={item.price}

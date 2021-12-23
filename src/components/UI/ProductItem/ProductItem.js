@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
 import classes from "./ProductItem.module.css";
+import { cartActions } from "../../../store/cart-slice";
 
 const ProductItem = ({
   id,
@@ -11,8 +13,21 @@ const ProductItem = ({
   image,
   rating,
 }) => {
+  const dispatch = useDispatch();
+
   const addToCartHandler = () => {
     console.log("clicked add to cart with", title);
+    dispatch(
+      cartActions.addItem({
+        id,
+        title,
+        price,
+        description,
+        category,
+        image,
+        rating,
+      })
+    );
   };
 
   return (
