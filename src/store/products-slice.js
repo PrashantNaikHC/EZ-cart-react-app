@@ -7,7 +7,7 @@ const productsSlice = createSlice({
     productList: [],
     filteredList: [],
     searchMode: false,
-    searchText:''
+    searchText: "",
   },
   reducers: {
     /**
@@ -28,9 +28,9 @@ const productsSlice = createSlice({
     filterSearch(state, action) {
       const searchText = action.payload;
       state.searchText = searchText;
-      console.log('product list',state.productList);
+      console.log("product list", state.productList);
       state.filteredList = state.productList.filter((product) =>
-        product.title.includes(searchText)
+        product.title.toLowerCase().includes(searchText.toLowerCase())
       );
       console.log("reducer executed", "filterSearch");
     },
