@@ -1,30 +1,31 @@
 import React from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect } from "react/cjs/react.development";
+import useHttp from "../../../hooks/use-http";
+import { getAllProducts } from "../../../lib/api";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ProductItem from "../ProductItem/ProductItem";
 
 const Products = (props) => {
-  const [products, setProducts] = useState([]);
-
-  const getProducts = async () => {
-    fetch("https://fakestoreapi.com/products")
-      .then((result) => {
-        return result.json();
-      })
-      .then((data) => {
-        setProducts(data);
-        return data;
-      });
-  };
+  const { sendRequest, status, data, error } = useHttp(getAllProducts);
 
   useEffect(() => {
-    getProducts();
-  }, []);
+    sendRequest();
+    console.log('data', data);
+  }, [sendRequest]);
 
-  return (
-    <div>
-      <ProductItem products={products} />
-    </div>
-  );
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="centered">{error}</p>;
+  }
+
+  return <div>{status === "completed" && <ProductItem products={data} />}</div>;
 };
 
 export default Products;

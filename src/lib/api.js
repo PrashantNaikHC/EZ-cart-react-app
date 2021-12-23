@@ -5,7 +5,6 @@ export async function getAllProducts() {
     if(!response.ok) {
         throw new Error(data.message || 'Could not fetch products')
     }
-    const data = await response.json();
     return data;
 }
 
