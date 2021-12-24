@@ -29,7 +29,7 @@ const MainNavigation = (props) => {
     <header className={classes.header}>
       <Link className={classes.logo}>EZCart</Link>
       <div>
-        <input type="text" id="search" placeholder="Search products" onChange={searchInputHandler}></input>
+        <input className={classes.searchinput} type="text" id="search" placeholder="Search products" onChange={searchInputHandler}></input>
       </div>
       <nav>
         <ul>

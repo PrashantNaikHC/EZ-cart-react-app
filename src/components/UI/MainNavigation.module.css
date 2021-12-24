@@ -37,3 +37,9 @@
     text-decoration: none;
     color: white;
 }
+
+.searchinput {
+  font-family: inherit;
+  width: 600px;
+  height: 40px;
+}
