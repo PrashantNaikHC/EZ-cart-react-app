@@ -76,7 +76,7 @@ const Products = (props) => {
   return (
     <div>
       {productSearchSelector && (
-        <p>
+        <p style={{margin: "10px"}}>
           {`Found ${productsSelector.length} item for `}
           <strong>{productsSearchTextSelector}</strong>
         </p>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react/cjs/react.development";
 import { productActions } from "../../../store/products-slice";
 import classes from "./Filter.module.css";
+import FilterOptions from "./FilterOptions";
 
 const Filter = (props) => {
   const [topPrice, setTopPrice] = useState(1000);
@@ -11,8 +12,11 @@ const Filter = (props) => {
   const categoryRef = useRef();
   const [filterEnabled, setFilterEnabled] = useState(false);
   let firstExecution = true;
+  const productsList = useSelector((state) => state.products.productList);
+  const categories = new Set(productsList.map((product) => product.category));
+  console.log("cat", Array.from(categories));
 
-  // this block is inside the useEffect hook, 
+  // this block is inside the useEffect hook,
   // since the changes of topPrice and bottomPrice were not showing up immediately
   useEffect(() => {
     dispatchFilterAction();
@@ -46,13 +50,11 @@ const Filter = (props) => {
   const topPriceInputHandler = (event) => {
     console.log("top price change", event.target.value);
     setTopPrice(event.target.value);
-    //dispatchFilterAction();
   };
 
   const bottomPriceInputHandler = (event) => {
     console.log("bottom price change", event.target.value);
     setBottomPrice(event.target.value);
-    //dispatchFilterAction();
   };
 
   return (
@@ -64,8 +66,7 @@ const Filter = (props) => {
         ref={categoryRef}
         onChange={filterInputHandler}
       >
-        <option value="men's clothing">men's clothing</option>
-        <option value="jewelery">jewelery</option>
+        <FilterOptions categories={Array.from(categories)} />
       </select>
       <span>, with price </span>
 
