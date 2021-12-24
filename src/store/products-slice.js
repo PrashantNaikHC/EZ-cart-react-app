@@ -35,6 +35,30 @@ const productsSlice = createSlice({
       console.log("reducer executed", "filterSearch");
     },
 
+    /**
+     * Payload is below mentioned object
+     * @param {state} state
+     * @param {action} action
+     * {
+     *  category: "mens clothing"
+     *  rangeTop: "10"
+     *  rangeBottom: "100"
+     * }
+     */
+    filterSearchWithParams(state, action) {
+      const { category, rangeTop, rangeBottom } = action.payload;
+      console.log("filtering by params ", category, rangeTop, rangeBottom);
+      state.filteredList = state.productList
+        .filter((product) => product.category === category)
+        .filter(
+          (product) =>
+            +product.price > +rangeBottom && +product.price < +rangeTop
+        );
+
+      console.log("filtered list", state.filteredList);
+      state.searchText = "applied filter";
+    },
+
     toggleSearchMode(state, action) {
       state.searchMode = action.payload;
     },
