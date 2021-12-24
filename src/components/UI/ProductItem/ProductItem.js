@@ -32,14 +32,16 @@ const ProductItem = ({
 
   return (
     <li className={classes.item} key={id}>
-      <img src={image} style={{ width: "25%" }}></img>
+      <div className={classes.detail}>
+        <img src={image} className={classes.productImage}></img>
+        <h4 className={classes.amount}><i>${price}</i></h4>
+      </div>
       <div className={classes.detail}>
         <h4>{title}</h4>
-        <p>{description}</p>
-        <input type="number" min="0" max="10"></input>
+        <p className={classes.description}>{description}</p>
+        {/* <input type="number" min="0" max="10"></input> */}
         <Button onClick={addToCartHandler}>Add to cart</Button>
       </div>
-      <br />${price}
     </li>
   );
 };
