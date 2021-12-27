@@ -12,29 +12,35 @@ const Cart = (props) => {
   return (
     <React.Fragment>
       <MainNavigation />
-      <div className="col9">
-        <ul>
-          {cartItems.map((item) => (
-            <ProductItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              price={item.price}
-              description={item.description}
-              category={item.category}
-              image={item.image}
-              rating={item.rating}
-            />
-          ))}
-        </ul>
-      </div>
-      <div className="col3">
-        <h3>Cart details</h3>
-        <ul>
-          <PriceInfo cartDetails={cartItems} />
-        </ul>
-        
-      </div>
+      {cartItems.length === 0 ? (
+        <h1 style={{'text-align': "center"}}>Your cart is empty!</h1>
+      ) : (
+        <div className="centered">
+          <div className="col9">
+            <ul>
+              {cartItems.map((item) => (
+                <ProductItem
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  price={item.price}
+                  description={item.description}
+                  category={item.category}
+                  image={item.image}
+                  rating={item.rating}
+                  isCartItem={true}
+                />
+              ))}
+            </ul>
+          </div>
+          <div className="col3">
+            <h3>Cart details</h3>
+            <ul>
+              <PriceInfo cartDetails={cartItems} />
+            </ul>
+          </div>
+        </div>
+      )}
     </React.Fragment>
   );
 };

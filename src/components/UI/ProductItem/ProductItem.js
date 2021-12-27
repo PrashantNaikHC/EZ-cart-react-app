@@ -12,35 +12,46 @@ const ProductItem = ({
   category,
   image,
   rating,
+  isCartItem,
 }) => {
   const dispatch = useDispatch();
 
   const addToCartHandler = () => {
     console.log("clicked add to cart with", title);
-    dispatch(
-      cartActions.addItem({
-        id,
-        title,
-        price,
-        description,
-        category,
-        image,
-        rating,
-      })
-    );
+    if (isCartItem) {
+      dispatch(cartActions.removeItem(id));
+    } else {
+      dispatch(
+        cartActions.addItem({
+          id,
+          title,
+          price,
+          description,
+          category,
+          image,
+          rating,
+        })
+      );
+    }
   };
 
   return (
     <li className={classes.item} key={id}>
       <div className={classes.detail}>
         <img src={image} className={classes.productImage}></img>
-        <h4 className={classes.amount}><i>${price}</i></h4>
+        <h4 className={classes.amount}>
+          <i>${price}</i>
+        </h4>
       </div>
       <div className={classes.detail}>
         <h4>{title}</h4>
         <p className={classes.description}>{description}</p>
         {/* <input type="number" min="0" max="10"></input> */}
-        <Button onClick={addToCartHandler}>Add to cart</Button>
+        {isCartItem ? (
+          <Button onClick={addToCartHandler}>Remove from cart</Button>
+        ) : (
+          <Button onClick={addToCartHandler}>Add to cart</Button>
+        )}
       </div>
     </li>
   );

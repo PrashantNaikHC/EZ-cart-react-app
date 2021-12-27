@@ -53,6 +53,7 @@ const Products = (props) => {
           category={item.category}
           image={item.image}
           rating={item.rating}
+          isCartItem={false}
         />
       </ul>
     ));
@@ -69,6 +70,7 @@ const Products = (props) => {
           category={item.category}
           image={item.image}
           rating={item.rating}
+          isCartItem={false}
         />
       </ul>
     ));

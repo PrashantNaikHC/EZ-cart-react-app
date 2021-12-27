@@ -33,12 +33,22 @@ const cartSlice = createSlice({
       const id = action.payload;
       const existingItem = state.cartItems.find((item) => item.id === id);
       if (existingItem) {
+        console.log("item exists");
         // item already present in cart, remove it
         state.cartItems = state.cartItems.filter(
           (item) => item.id !== existingItem.id
         );
       }
-      console.log("reducer executed", "removeItem");
+      console.log("reducer executed", "removeItem", state.cartItems);
+    },
+
+    /**
+     * Has no payload, clears the cart array
+     * @param {state} state
+     * @param {action} action
+     */
+    clearCart(state, action) {
+      state.cartItems = [];
     },
   },
 });
