@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react/cjs/react.development";
 import { productActions } from "../../../store/products-slice";
-import classes from "./Filter.module.css";
 import FilterOptions from "./FilterOptions";
 
 const Filter = (props) => {
@@ -58,7 +57,7 @@ const Filter = (props) => {
   };
 
   return (
-    <div className={classes.mainblock}>
+    <div>
       <label htmlFor="category">Choose category</label>
       <select
         name="category"
@@ -68,7 +67,8 @@ const Filter = (props) => {
       >
         <FilterOptions categories={Array.from(categories)} />
       </select>
-      <span>, with price </span>
+      <hr />
+      <span>Price range : </span>
 
       <label htmlFor="priceBottom">From</label>
       <input
@@ -93,6 +93,8 @@ const Filter = (props) => {
         max="1000"
         onChange={topPriceInputHandler}
       ></input>
+
+      <hr />
 
       <input
         type="checkbox"
