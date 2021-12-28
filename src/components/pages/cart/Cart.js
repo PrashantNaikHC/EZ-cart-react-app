@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import MainNavigation from "../../UI/MainNavigation";
 import PriceInfo from "../../UI/PriceInfo/PriceInfo";
 import ProductItem from "../../UI/ProductItem/ProductItem";
-import classes from "./Cart.module.css";
 
 const Cart = (props) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -13,7 +12,7 @@ const Cart = (props) => {
     <React.Fragment>
       <MainNavigation />
       {cartItems.length === 0 ? (
-        <h1 style={{'text-align': "center"}}>Your cart is empty!</h1>
+        <h1 style={{'textAlign': "center"}}>Your cart is empty!</h1>
       ) : (
         <div className="centered">
           <div className="col9">

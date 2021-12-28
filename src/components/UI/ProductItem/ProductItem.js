@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
 import classes from "./ProductItem.module.css";
 import { cartActions } from "../../../store/cart-slice";
+import { Link } from "react-router-dom";
 
 const ProductItem = ({
   id,
@@ -44,9 +45,9 @@ const ProductItem = ({
         </h4>
       </div>
       <div className={classes.detail}>
-        <h4>{title}</h4>
+        <Link to={`/products/${id}`}><h4>{title}</h4></Link>
+        
         <p className={classes.description}>{description}</p>
-        {/* <input type="number" min="0" max="10"></input> */}
         {isCartItem ? (
           <Button onClick={addToCartHandler}>Remove from cart</Button>
         ) : (
