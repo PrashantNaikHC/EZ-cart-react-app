@@ -1,0 +1,10 @@
+.header {
+  position: -webkit-sticky;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.content {
+  padding-top: 80px;
+}
