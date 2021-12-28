@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { getProductById } from "../../../lib/api";
@@ -10,6 +10,8 @@ import MainNavigation from "../../UI/MainNavigation";
 
 const ProductItemDetails = (props) => {
   const [currentProduct, setCurrentProduct] = useState(null);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const [isCartItem, setIsCartItem] = useState(false)
   const dispatch = useDispatch();
   const params = useParams();
   const productId = params.productItem;
@@ -32,8 +34,10 @@ const ProductItemDetails = (props) => {
         image: data.image,
         rating: data.rating,
       });
+      setIsCartItem(cartItems.filter((item) => item.id === data.id).length > 0)
+      console.log("cart item", isCartItem);
     }
-  }, [status]);
+  }, [status, cartItems, isCartItem]);
 
   if (error) {
     return <p className="centered">{error}</p>;
@@ -46,6 +50,11 @@ const ProductItemDetails = (props) => {
   const addToCartHandler = () => {
     dispatch(cartActions.addItem(currentProduct));
   };
+
+  const removeFromCartHandler = () => {
+    dispatch(cartActions.removeItem(currentProduct.id));
+  }
+
   return (
     <React.Fragment>
       <MainNavigation />
@@ -70,7 +79,11 @@ const ProductItemDetails = (props) => {
               Rating : {data.rating.rate} out of 5 (
               <i>{percentage(data.rating.rate)}%)</i>
             </p>
-            <Button onClick={addToCartHandler}> Add to cart</Button>
+            {isCartItem ? (
+              <Button onClick={removeFromCartHandler}> Remove from cart</Button>
+            ) : (
+              <Button onClick={addToCartHandler}> Add to cart</Button>
+            )}
           </div>
         </div>
       )}
