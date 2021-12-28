@@ -7,6 +7,8 @@ import Home from "./components/pages/home/home";
 import AuthContext from "./store/auth-context";
 import Cart from "./components/pages/cart/Cart";
 import ProductItemDetails from "./components/pages/ProductItemDetails/ProductItemDetails";
+import MainNavigation from "./components/UI/MainNavigation";
+import MainRouter from "./components/UI/MainRouter/MainRouter";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -14,26 +16,7 @@ function App() {
   return (
     <div>
       {/* todo : update to protected routes */}
-      <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/products/:productItem">
-          <ProductItemDetails />
-        </Route>
-        <Route path="/products">
-          {console.log("login", authContext.isLoggedIn)}
-          <Home />
-          {/* {authContext.isLoggedIn ? <Home /> : <Login />} */}
-        </Route>
-        <Route path="/cart">
-          {/* {authContext.isLoggedIn ? <Cart /> : <Login />} */}
-          <Cart />
-        </Route>
-      </Switch>
+      <MainRouter/>
     </div>
   );
 }

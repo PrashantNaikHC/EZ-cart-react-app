@@ -10,7 +10,6 @@ const Cart = (props) => {
 
   return (
     <React.Fragment>
-      <MainNavigation />
       {cartItems.length === 0 ? (
         <h1 style={{'textAlign': "center"}}>Your cart is empty!</h1>
       ) : (

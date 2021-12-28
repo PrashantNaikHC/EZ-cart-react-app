@@ -6,7 +6,6 @@ import Products from "../../UI/Products/Products";
 const Home = (props) => {
   return (
     <React.Fragment>
-      <MainNavigation />
       <div className="row">
         <div className="col3">
           <Filter />

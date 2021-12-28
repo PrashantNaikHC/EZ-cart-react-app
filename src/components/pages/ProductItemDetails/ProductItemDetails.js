@@ -57,7 +57,6 @@ const ProductItemDetails = (props) => {
 
   return (
     <React.Fragment>
-      <MainNavigation />
       {status === "pending" && (
         <div className="centered">
           <LoadingSpinner />
