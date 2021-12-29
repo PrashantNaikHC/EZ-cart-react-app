@@ -66,9 +66,14 @@ const Login = (props) => {
   const passwordInputClasses = passwordInputHasError ? "errorInput" : "input";
   console.log("Rendering component");
 
+  if(!props.isLoggingIn) {
+    authContext.logout();
+  }
+
   return (
     <React.Fragment>
       <h1 className={classes.h1}>EZ Cart</h1>
+      {!props.isLoggingIn && <p className={classes.h1}>You have logged out successfully. Login to explore products.</p>}
       <form className={classes.form} onSubmit={onSubmitHandler}>
         <div className={classes.inputBlock}>
           <label className={classes.label} htmlFor="username">
